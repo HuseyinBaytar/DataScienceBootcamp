@@ -1,0 +1,23 @@
+conda env list = sanal ortamların listelenmesi
+conda create -n "verilmek istenen isim" = sanal ortam oluşturma
+conda activate "isim" = oluşturulan sanal ortama geçiş
+conda deactivate "isim" = oluşturulan sanal ortamdan çıkış
+conda list  = yüklü paketlerin listelenmesi
+conda install "kütüphane ismi" =  yazılan kütüphaneyi indirir
+conda install "kütüphane ismi" "kütüphane ismi"= 1den fazla library indirir
+conda remove package_name = ismi verilen paketi siler
+conda instal libraryname=x.xx.x = x'lere numara verip istediğin paket sürümünü indirir
+conda upgrade packagename = en güncel versiyona yükseltir libraryi
+conda upgrade all  = tüm libraryleri günceller
+
+pip install paketadi = verdiğin ismi indirir
+pip install paketadi==versiyonnumarası  = versiyona göre indirir
+
+"paketi başka bir arkadaşına yollamak için "
+
+conda env export > environment.yaml
+dir
+
+"başka bir bilgisayarda bunu açmak için "
+conda env create -f environment.yaml 
+
