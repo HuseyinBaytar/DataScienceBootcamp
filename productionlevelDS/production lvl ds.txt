@@ -1,0 +1,352 @@
+############## Linux Komut Satırına Giriş ##############
+
+pwd = olduğumuz dosyanın dizinini gösterir.
+
+ls = ile listeliyebiliyoruz
+ls - l = ile daha detaylı şekilde listeler.
+ls -lh = human readble olarak print ettirir
+ls -lr = dediğimizde sıralama tersten başlar
+ls -ltr = tarihe göre sıralama olur 
+ls -la = hidden file'ları gösterir 
+
+
+history = kullandığımız komutların bir listesini tutar
+history 10  = dersek son 10 komut, 20 dersek 20 komut
+
+cd = dizin değiştirmek için kullanılır.
+
+-v tersini al denir
+
+alias ml = "echo "merhaba linux""
+ml = yazdığımızda merhaba linux yazar
+
+env = komutuyla ortamdaki değişkenleri görebiliriz
+
+örneğin: MY_NAME = curbe
+echo $MY_NAME    = curbeyi döndürür
+
+env | grep MY_NAME  =  bütün değişkenler içinden my_name dğeişkenini getirir
+
+linuxda terminale yazılan herşey komuttur,
+komut - options argument   """ olarak yazılmalıdır 
+
+Grep oldukça sık kullanılan bir komut, global regular expresion print
+grep option patern files  <  komut sırasıdır
+
+^ start of expression 
+"verilen değer ile başlıyanları getir"
+
+$ end of expression
+dolar sonda olacak şekilde "verilen değer ile bitenleri getir"
+
+. or dot will match any character
+"harf.harf" içinde . geçenleri getirir örneğin: k.ş  = gelen şey kuş 
+
+[] will match a range of characters
+m[au]k  = m ile başlayan içinde a ve u içeren] k ile bitenleri getir
+
+[^] will match all charcater except for the one mentioned in braces
+m[^au]k  m ile başlayan a ve u içermeyen k ile bitenleri getir
+
+* will match zero or more of the preceding items
++ will match one or more of the precending items
+? will match zero or one of the preceding items
+
+{n} will match 'n' numbers of preceding items
+içine verilen sayı kadar yakalar örneğin başına [0-9] yazarsak, 11 haneli rakamları yakalar
+
+{n,} will match 'n' number of or more of preceding items
+{n m} will match beetwen 'n' & 'm' number of items
+{ , m} will match less than or equal to m number of items
+
+
+mkdir  = bir dizin oluşturmak için deriz 
+mkdir my_folder  klasör oluştururuz
+örneğin sonrasında ls ile bakabiliriz
+touch my_file  ilede text dosyası oluşturabiliriz 
+
+rm my_file  ile myfile'ı silebiliriz  
+rm -r my_folder ilede folder klasörünü sileriz 
+
+touch my_file1 diyerek, dosyamızı kurup içine random bişeyler yazıyoruz
+mkdir my_folder1 ile klasör oluşturduk
+
+cp my_file1 my_folder1/ ile  file'ımızı folderın içine kopyalıyoruz
+
+mv myfile1 my_file_renamed  dersek, myfile1'in adını değiştirir
+
+
+touch output. txt ile dosya oluşturyoruz
+nano output.txt ile içine random bişeyler yazıyoruz
+sed "1d" output.txt ile içindeki ilk satırı siler ama inplace true gibi işlem vermedik
+sed -i '1d" output.txt yaparsak içindeki ilk satırı tamamen siler 
+sed "s aranan ve yerine geçicek ifade  g" file formtaında
+sed 's+line+line_recplaced+g' output.txt dediğimizde dosyamızın içine yazdığımız line'lara replace ekledik
+
+
+less output.txt ile dosyanın içinde gezebiliyoruz
+
+more output.txt ile'de aynı şekilde gezebilyioruz ama less daha gelimiş
+
+head output.txt ile ilk 5 satır
+tail output.txt ile son 5 satır
+
+pipe işareti standart outputu çıktıyı yönlendiriyoz 
+ls l /etc |grep ssh deidğimizde ssh olanlar geldi sdadece 
+
+cat output.txt > output_directed  yaparsak eğer output directeda yönlendirir,
+
+echo "This is new line" >> output_directed  output_directedin içine yerleşti
+
+cat  << EOF > sortfile.txt
+> ali 23
+> mahmu 25
+> cemal 41   tarzı satırlar oluşturuyoruz
+> EOF  (end of file) diyoruz bitince
+
+sortfile.txt yaparsak alfabetik olarak sıralar
+
+
+for i in {1..50}; do echo" i am male"; done    yazdığımızda 50 kere i am male yazar
+
+gunzip ile sıkıştırılan dosyayı açabiliriz
+
+bu bir sıkıştırma değil arşivlemedir. sıkıştırmıyoruz arşivliyoruz
+
+tar -cf arşiv oluştururken
+tar -xf arşivden çıkarırken 
+
+find ve locate arasındaki fark, locate bu işe tahsis edilmiş veritabanında, find genel olarak
+
+locate blabla.csv  'ye baktığımızda yerini görürüz
+find /home/train -name "blabla*"  içindeki tüm blabla geçenleri getirir
+
+vi  text_file 
+text_file'ı açıp, içine yazı yazabiliriz
+
+vim text_file  ile benzer işler yapılabilir ama daha gelişmiş tarzıdır.
+
+nano list_file ile benzer işler yapılabilir edit için yapılır genelde.
+
+rwx = read, write, execute
+rw- = read,write
+r-- = read 
+dosya erişim yetkilerini görebiliyoruz 
+
+chmod 755 diyip dosyayı dizinini verirsek örneğin advertising.csv
+şekli değişir  yetki verilir
+
+chown train:docker 2_and_1.txt diyip, grup yetkisinin sahipliğini değiştirdik.
+docker grubuna dahil olanlara yetki verildi yani 
+
+useradd kullanıcıadı  ile kullanıcı ekledik
+id kullanıcıadı dediğimizde, kullanıcıyı görürüz
+
+-s (kullanıcının shellini)
+-d (home directorysini)
+-m (auto-create default home directory)
+-g (set the primary group
+-G (grouplist)
+
+#docker grubuna kullanıcıadı isimli kullanıcıyı ekliyoruz
+sudo usermod -aG docker kullanıcıadı
+
+userdel kullanıcıadı   useri siler
+userdel -r kullanıcıadı   useri tamamen siler (inplace=True) gibi
+
+
+sudo systemctl status postgresql-10  yaptığımızda sql'in durumuna bakarız
+sudo systemctl stop postgresql-10  ile sql'i durdurabiliriz 
+sudo systemctl start postgresql-10 ile tekrar çalıştırabiliriz
+
+yum bir paket yöneticisidir. pyhtondaki pip gibidir. 
+sudo yum repolist  yazdığımızda paketlerimizi görürüz
+sudo yum install paketadı yazdığmızda paketi indirir.
+
+
+############## Temel Bash SCripting ##############
+ilk scriptimizi yazalım;
+mkdir bash_script diyerek kendimize bir dosya oluşturuyoruz
+cd bash_script/
+mkdir notes diye bir bash dosyamızıa koyuyoruz 
+
+nano simple.sh  isminde bir shell dosyası yaratıyoruz.
+!/bin/bash   "ilk satırımız standart"
+echo "hello i am simple bash script"
+
+cat simple.sh diyoruz ve içini okuyoruz
+chmod u+x simple.sh  kullanıcıya çalıştırma yetkisi veriyoruz
+/bin/bash simple.sh ile çalıştırıyoruz
+
+vim read.sh
+echo "hello, what is your name?"
+read ANSWER1
+echo " Niceto meet you, $answer1"
+./read.sh ile scripti yazdırıyoruz, cevap verdikçe kullanıcı cevabını yazdırıp ilerler.
+
+######## if koşulu oluşturmak
+x=5  if [ koşul ] ; then 
+	komut 
+elif  [ koşul] ; then
+	komut
+else
+	komut
+fi
+
+###  if koşulu ile file exp
+LOC = "dizin"
+if [ -e $LOC] ; then
+	echo "$LOC exists"
+else 
+	echo "$LOC not exists"
+fi
+
+
+#Kontrol operatörleri
+;  bir önceki komutun bittiğini belirtir, in line olarak yazılabilir
+
+mantıksal operatörleri yazarken 2 paranteze almak lazım ((3<2))  örnek olarak
+
+komut çalışsın && diğeri çalışssın
+komut çalışmazsa && diğeride çalışmasın
+
+|| 1.si hatalı olursa 2.sini çalıştır için kullanılır. 
+
+##For döngüsü
+for ((i=0; i<10, i++ ))
+do
+	echo "$i"
+done 
+
+
+## while
+
+START= argüman1
+STOP = argüman2
+while ((sına))
+do
+	komut
+done
+
+
+##fonksiyonlar
+
+function_name() {
+	komutlar
+}
+
+funciton_name ile çağırıyoruz 
+
+
+######################### Crontab ile periyodik işler yapmak ###############################
+
+crontab -l  ile mevcut işleri listeler.
+crontab -e ile vi editöründe planladığımız işleri yazmamız için sayfa açar.
+zaman  komut  olarak ilerler, ilk başa zaman sonrasına komut yazıyoruz ve sürekli olarak zamanı geldikçe çalıştırı
+
+crontub guru sitesinden  zaman ayarlaması yapılabilir.
+
+
+
+############## Git ##############
+
+git  --help  ile menüye bakabiliriz
+mkdir git_project diye git klasörümüzü açıyoruz
+cd git_protect/  'ilede o klasöre giriyoruz
+git config --global user.name"curbe" 
+git config --global user.email "curbe@hotmail.com"
+git config -- global color.ui.auto "çıktıları renklendirir"
+git init   " git projesi başlatıyoruz" "gizli dosyadır"
+
+touch hello.sh  basit bir dosya oluşturduk
+nano ile içini değiştirdik bin/bash etc etc.. 
+
+git status ile bakıp dosyayı algılayıp algılamadığını soruyoruz
+
+ilk 3'ü local, sonuncu dışarıdan bir alan
+ -------add-->     ------commit--->    ------push ---->
+working	       staging	         local			remote
+directory      (index)	         respitory		respitory
+
+
+############## PostgreSQL giriş ##############
+sudo systemctl status postgresql-10 ile kontrol ediyoruz
+
+psql -l   ile veri tabanlarını listeleriz
+
+psql -d traindb  ile traindb'ye bağlanıyoruz
+\q  ile traindbden çıkıyoruz
+
+create database test1;    veri tabanı oluştuyoruz
+drop database test1;     veri tabanını siliyoruz 
+
+elimizdeki csv dosyaını posgreSQL'e aktarmak, 
+psql -d traindb
+traindb=> create table users(id int, name varchar(20), age int);
+
+psql -d traindb -c "\copy users FROM 'our.csv' DELIMITERS ',' CSV HEADER;" 
+
+elimizdeki csv dosyasını, oluştuğurduğumuz table'a taşıdık.
+
+
+
+
+############## docker ile konteyner dünyasına giriş ##############
+
+docker açık platform, shipping ve running için.
+bir yazılımı hazırlayıp konteyner şekline getirip, onu yolluyoruz, dünyanın her yerinde çalışıyor.
+
+sudo systemctl status docker  ile bakıyoruz docker çalışıyor mu
+
+docker options komut  / olarak kod sistemi ilerliyor
+docker run hello-world = hem docker createle hemde çalıştır, demektir
+
+docker ps   = komutu ile çalışan konteynrları listeleriz
+docker ps -a  = çalışıp ama sonrasında durmuş konteynrları görürüz
+
+docker hub = imageların depolandığı public depodur
+docker login = bu kod ile login olabiliriz.
+docker logout = ilede çıkış yapılır.
+
+docker container stop = kullanılan konteynrı durdurur.
+docker container start = tekrar çalıştırır
+
+docker container exec -it konteynrAdı  /bin/bash = bu kod ile konteynra bağlanıyoruz 
+
+docker container logs konteynradı =  konteynr'ın loglarını gösterir
+
+kaybetmek istemediğimiz veri varsa volume kullanmamız lazım 
+docker volume create v_postgresql_10 = ile kurarsak kalıcı olarak durur 
+
+docker network ls = mevcut networkleri görürüz
+konteyrn oluşturduğumuzda eğer network belirtmezsek bridge'e dahil olur.
+
+docker image build --help ile bize neler kullanmamız gerektiğini söyler.
+
+docker image push dockerhubadresimiz =  imajı docker huba göndermek
+
+
+
+############## MLOPS ##############
+
+yapılan projenin modelinin izlenmesi, tekrar eğitilmesi vs bir sürü iş
+MLFLOW : mlops çalışmalarının yapılması için yapılan bir ortam
+
+start-all.sh diyoruz ve tüm hadoop servisleri çlaışıyor
+source ~/venvspark/bin/activate   diyoruz
+
+#### CI/CD  ve jenkins ###
+
+developer çalışmalarını bir repo'ya yollar, Repodan jenkins'e gider, derlenmesi gereken bir kod ise bunu derler ve
+test sunucusuna gönderir, test başarılı ise Production sunucularına gönderir. Sonrasında uygulama çalışmaya başlar
+
+
+
+
+
+
+
+
+
+
+
